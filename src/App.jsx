@@ -9,7 +9,7 @@ export default function App() {
   /* テーマ（ライト/ダーク） */
   const prefersDark =
     typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useLocalStorage('ui.theme', prefersDark ? 'dark' : 'light');
+  const [theme, setTheme] = useLocalStorage('cpp.theme', prefersDark ? 'dark' : 'light');
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
@@ -18,7 +18,7 @@ export default function App() {
   const [color, setColor] = useState('#00A3FF');
   const [hexInput, setHexInput] = useState(color);
   const [error, setError] = useState('');
-  const [favorites, setFavorites] = useLocalStorage('favorites.colors', []);
+  const [favorites, setFavorites] = useLocalStorage('cpp.favorites', []);
   useEffect(() => setHexInput(color), [color]);
   const inFavorites = useMemo(() => favorites.includes(color), [favorites, color]);
 
@@ -153,6 +153,17 @@ export default function App() {
     } catch {
       /* Clipboard API が無い/拒否された場合は黙って無視 */
     }
+  }
+  function resetData() {
+    if (!confirm('保存データ（お気に入り/テーマ）をリセットしますか？')) return;
+    try {
+      localStorage.removeItem('cpp.favorites');
+      localStorage.removeItem('cpp.theme');
+    } catch {
+      /* localStorage 不可環境は無視 */
+    }
+    setFavorites([]);
+    setTheme(prefersDark ? 'dark' : 'light');
   }
 
   return (
@@ -407,11 +418,16 @@ export default function App() {
 
       {/* フッター */}
       <footer className="footer">
-        <span className="subtle">データはこのブラウザに保存されます。</span>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+          <span className="subtle">データはこのブラウザに保存されます。</span>
+          <button className="btn" onClick={resetData} title="保存データを削除">
+            データをリセット
+          </button>
+        </div>
         <details className="subtle" style={{ marginTop: 6 }}>
           <summary>保存の詳細</summary>
           <small>
-            localStorage キー: <code>favorites.colors</code> / <code>ui.theme</code>
+            localStorage キー: <code>cpp.favorites</code> / <code>cpp.theme</code>
           </small>
         </details>
       </footer>
