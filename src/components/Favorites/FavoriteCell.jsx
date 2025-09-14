@@ -1,3 +1,20 @@
+/**
+ * FavoriteCell
+ * 役割: 単一色セル（色面 / HEXチップ / 削除 / ドラッグハンドル）
+ *
+ * @param {{
+ *   color: string,
+ *   onSelect: () => void,
+ *   onCopy: () => void,
+ *   onRemove: () => void,
+ *   onDragStart: (e:DragEvent) => void,
+ *   onDragEnd: () => void
+ * }} props
+ *
+ * 入力: 色と各イベントハンドラ
+ * 出力: なし（UIからの操作を props 経由で親へ伝播）
+ */
+
 export default function FavoriteCell({
   color,
   onSelect,

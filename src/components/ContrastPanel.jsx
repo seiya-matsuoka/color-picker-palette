@@ -1,3 +1,19 @@
+/**
+ * ContrastPanel
+ * 役割: コントラスト比の表示、テキスト色（自動/黒/白）の選択
+ *
+ * @param {{
+ *   textMode: 'auto'|'black'|'white',
+ *   onChangeTextMode: (mode:'auto'|'black'|'white') => void,
+ *   autoText: '#000000'|'#FFFFFF',
+ *   ratio: number|null,
+ *   aaSmall: boolean, aaLarge: boolean, aaaSmall: boolean, aaaLarge: boolean
+ * }} props
+ *
+ * 入力: 現在のモード/推奨/比/判定
+ * 出力: なし（モード変更を props に伝える）
+ */
+
 export default function ContrastPanel({
   textMode, // 'auto' | 'black' | 'white'
   onChangeTextMode, // (mode) => void

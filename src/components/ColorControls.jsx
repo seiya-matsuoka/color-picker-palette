@@ -1,3 +1,25 @@
+/**
+ * ColorControls
+ * 役割: 色入力（<input type="color"> / HEXテキスト）、プレビュー、コピー、追加ボタン
+ *
+ * @param {{
+ *   color: string,
+ *   hexInput: string,
+ *   error: string,
+ *   inFavorites: boolean,
+ *   effectiveText: string, // 実際に描画されるテキスト色（auto/black/white の結果）
+ *   rgb: { r:number, g:number, b:number },
+ *   onColorChange: (value:string) => void,
+ *   onHexInputChange: (value:string) => void,
+ *   onHexCommit: () => void,
+ *   onCopyHex: () => void,
+ *   onAddFavorite: () => void
+ * }} props
+ *
+ * 入力: 現在色/入力値/エラーメッセージ/重複フラグ/テキスト色/rgb
+ * 出力: なし（各UIイベントを props 経由で親に返す）
+ */
+
 export default function ColorControls({
   color,
   hexInput,

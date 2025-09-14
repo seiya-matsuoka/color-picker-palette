@@ -1,3 +1,13 @@
+/**
+ * 色の基本ユーティリティ
+ *  - normalizeHex(input): '#rgb' / '#rrggbb' を '#RRGGBB' 形式に正規化（無効なら null）
+ *  - hexToRgb(hex): {r,g,b} or null
+ *  - rgbToHex({r,g,b}): '#RRGGBB'
+ *  - clamp255(n) / toHex(n): 範囲・16進表現ユーティリティ
+ *
+ * 入出力はプレーンな値（String/Number/Object）のみ。DOM/API依存なし。
+ */
+
 // 色の基本ユーティリティ
 export function normalizeHex(input) {
   if (!input) return null;

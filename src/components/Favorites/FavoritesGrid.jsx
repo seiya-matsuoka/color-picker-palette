@@ -1,3 +1,19 @@
+/**
+ * FavoritesGrid
+ * 役割: お気に入り色リストの表示 + DnD 並べ替え
+ *
+ * @param {{
+ *   favorites: string[],
+ *   onSelectColor: (hex:string) => void,
+ *   onCopyColor: (hex:string) => void,
+ *   onRemoveColor: (hex:string) => void,
+ *   onReorder: (from:number, to:number) => void
+ * }} props
+ *
+ * 入力: favorites 配列
+ * 出力: onSelectColor / onCopyColor / onRemoveColor / onReorder
+ */
+
 import { useState } from 'react';
 import FavoriteCell from './FavoriteCell.jsx';
 

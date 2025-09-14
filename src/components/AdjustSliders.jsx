@@ -1,9 +1,31 @@
+/**
+ * AdjustSliders
+ * 役割: HSL / HSV スライダーで色を微調整
+ *
+ * @param {{
+ *   adjustMode: 'hsl'|'hsv',
+ *   onChangeMode: (mode:'hsl'|'hsv') => void,
+ *   hue: number,
+ *   sat: number,
+ *   lv: number,
+ *   hueBg: object,
+ *   sBg: object,
+ *   lvBg: object, // スライダー背景グラデ用 style
+ *   onChangeHue: (value:string|number) => void,
+ *   onChangeSat: (value:string|number) => void,
+ *   onChangeLv: (value:string|number) => void
+ * }} props
+ *
+ * 入力: モード/現在値/背景style
+ * 出力: なし（スライダー操作を props に伝える）
+ */
+
 export default function AdjustSliders({
   adjustMode, // 'hsl' | 'hsv'
   onChangeMode, // (mode) => void
   hue,
   sat,
-  lv, // numbers
+  lv,
   hueBg,
   sBg,
   lvBg, // style objects

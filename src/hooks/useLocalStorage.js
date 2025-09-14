@@ -1,3 +1,19 @@
+/**
+ * useLocalStorage(key, initialValue)
+ * 目的: React state と localStorage を簡易同期
+ *
+ * 動作:
+ *  - 初期化時: localStorage に key があれば JSON.parse して採用、無ければ initialValue
+ *  - 値更新: 値を JSON.stringify して localStorage に保存（try/catch）
+ *
+ * 例:
+ *   const [theme, setTheme] = useLocalStorage('cpp.theme', 'light')
+ *
+ * @param {string} key
+ * @param {any} initialValue
+ * @returns {[any, (v:any)=>void]}
+ */
+
 import { useEffect, useState } from 'react';
 
 // localStorage 永続化フック

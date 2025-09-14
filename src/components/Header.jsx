@@ -1,3 +1,16 @@
+/**
+ * Header
+ * 役割: タイトル・サブタイトルの表示、テーマ切替（ライト/ダーク）
+ *
+ * @param {{
+ *   theme: 'light'|'dark',
+ *   onToggleTheme: () => void
+ * }} props
+ *
+ * 入力: theme（現在のテーマ）
+ * 出力: なし（onToggleTheme をクリックで呼ぶだけ）
+ */
+
 export default function Header({ theme, onToggleTheme }) {
   return (
     <header className="header">

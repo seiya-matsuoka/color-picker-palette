@@ -1,3 +1,30 @@
+/**
+ * App（ルートコンテナ）
+ * 役割:
+ *  - アプリ全体の状態管理（theme / color / favorites / textMode / adjustMode）
+ *  - 表示に必要な派生値の計算（rgb/hsl/hsv/contrast/推奨テキスト色）
+ *  - UIコンポーネントへ props で値とイベントハンドラを配線
+ *
+ * 主な状態（useState / useLocalStorage）:
+ *  - theme: 'light' | 'dark'                   // localStorage: "cpp.theme"
+ *  - color: string ('#RRGGBB')                 // 現在の選択色
+ *  - favorites: string[]                       // お気に入りの色（localStorage: "cpp.favorites"）
+ *  - textMode: 'auto' | 'black' | 'white'      // テキスト色の決定モード
+ *  - adjustMode: 'hsl' | 'hsv'                 // 微調整UIのモード
+ *
+ * 主な派生値（useMemo）:
+ *  - rgb / hsl / hsv: color からの変換
+ *  - ratio: 背景(color)とテキスト色のコントラスト比
+ *  - autoText: 背景に対して黒/白どちらが読みやすいかの推奨
+ *
+ * データフロー:
+ *  - App → 子コンポーネント
+ *  - ユーザー操作（クリック/入力/ドラッグ）→ ハンドラで state 更新 → 再描画
+ *
+ * 注意:
+ *  - ユーティリティは /lib に分離（副作用なし）
+ */
+
 import { useEffect, useMemo, useState } from 'react';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import { hexToRgb, normalizeHex } from './lib/color.js';

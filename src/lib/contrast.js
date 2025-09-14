@@ -1,4 +1,10 @@
-// 輝度・コントラスト計算
+/**
+ * 輝度・コントラスト
+ *  - relativeLuminance({r,g,b}): WCAG準拠の相対輝度
+ *  - contrastRatioHex(bgHex, fgHex): (L1+0.05)/(L2+0.05)
+ *  - bestTextColor(bgHex): 背景に対して黒/白どちらがコントラスト優位か
+ */
+
 import { hexToRgb } from './color.js';
 
 export function sRgbToLinear(c) {

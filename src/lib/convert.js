@@ -1,4 +1,12 @@
-// RGB <-> HSL/HSV 変換
+/**
+ * 色空間変換
+ *  - rgbToHsl({r,g,b}) -> {h,s,l}（0-360, 0-100, 0-100）
+ *  - hslToRgb({h,s,l}) -> {r,g,b}
+ *  - rgbToHsv({r,g,b}) -> {h,s,v}
+ *  - hsvToRgb({h,s,v}) -> {r,g,b}
+ *  - hslToHex(h,s,l) / hsvToHex(h,s,v) -> '#RRGGBB'
+ */
+
 import { clamp255, rgbToHex } from './color.js';
 
 export function rgbToHsl({ r, g, b }) {
