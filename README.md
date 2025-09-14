@@ -37,6 +37,29 @@ npm run dev
 - `format:check` / `format:fix`
 - `lint` / `lint:fix`
 
+## プロジェクト構成（抜粋）
+
+```
+src/
+  components/
+    Favorites/
+      FavoriteCell.jsx
+      FavoritesGrid.jsx
+    AdjustSliders.jsx
+    ColorControls.jsx
+    ContrastPanel.jsx
+    Header.jsx
+  hooks/
+    useLocalStorage.js
+  lib/
+    color.js
+    convert.js
+    contrast.js
+  App.jsx
+  main.jsx
+  index.css
+```
+
 ## 技術スタック
 
 - React + Vite
@@ -47,16 +70,3 @@ npm run dev
 
 - `vite.config.js` の `base` を `'/color-picker-palette/'` に設定
 - GitHub Actions（`deploy.yml`）が `main` への push で自動デプロイ
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
