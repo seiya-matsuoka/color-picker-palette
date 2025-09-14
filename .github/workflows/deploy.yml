@@ -1,0 +1,65 @@
+# ワークフロー名（Actions 画面に表示される）
+name: Deploy to GitHub Pages
+
+on:
+  # main ブランチに push されたら自動実行
+  push:
+    branches: [main]
+  # Actions タブから手動実行もできるようにする
+  workflow_dispatch:
+
+# GITHUB_TOKEN の権限。Pages へデプロイするのに必要な最小権限を付与
+permissions:
+  contents: read # リポジトリの内容を読む
+  pages: write # GitHub Pages への書き込み（デプロイ）を許可
+  id-token: write # OIDC での認証に必要（deploy-pages が使用）
+
+# 競合する同時実行を防ぐ（連続 push 時に古いジョブをキャンセルしない設定）
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  # 1. ビルドして静的ファイル（dist）をアーティファクト化
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # リポジトリのソースを取得
+      - uses: actions/checkout@v4
+
+      # Node.js をセットアップ（バージョン 20）+ npm キャッシュ有効化
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 依存のインストール（CI 用の厳格インストール：lockfile に完全一致）
+      - run: npm ci
+
+      # 本番ビルド（Vite の出力が dist/ に生成される）
+      # ※ GitHub Pages のプロジェクトページで配信する場合は、
+      #    vite.config.js の base に "/<REPO_NAME>/" を設定しておくこと
+      - run: npm run build
+
+      # SPA ルーティング対策：
+      # GitHub Pages は 404.html を "ルートフォールバック" として扱えるため、
+      # ルーターを使う SPA では 404.html を index.html のコピーにしておくと安心
+      - run: cp dist/index.html dist/404.html
+
+      # dist/ を Pages 用アーティファクトとしてアップロード
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  # 2. Pages へデプロイ（上の build ジョブの成果物を公開）
+  deploy:
+    needs: build # build が成功したら実行
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages # デフォルトの Pages 環境
+      # 公開 URL を出力として受け取り、Actions の画面に表示
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # GitHub Pages へ実デプロイ。内部で GITHUB_TOKEN / OIDC を利用。
+      - id: deployment
+        uses: actions/deploy-pages@v4
