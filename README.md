@@ -4,7 +4,9 @@ HSL/HSV の調整・コントラスト表示つきのカラーパレット（Rea
 
 ## デモ
 
-公開URL:
+公開URL:https://seiya-matsuoka.github.io/color-picker-palette/
+
+[![Deploy to GitHub Pages](https://github.com/seiya-matsuoka/color-picker-palette/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/seiya-matsuoka/color-picker-palette/actions/workflows/deploy.yml)
 
 ## 主な機能
 
